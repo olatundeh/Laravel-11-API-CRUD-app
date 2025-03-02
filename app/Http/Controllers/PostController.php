@@ -20,7 +20,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $field = $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
+
+        $post = Post::create($field);
+        return ['message' => 'Post created', 'post' => $post];
     }
 
     /**
